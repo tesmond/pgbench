@@ -1,7 +1,6 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from .api import router as api_router
-from .routers.pgbench import router as pgbench_router
 from .database import create_db_and_tables
 
 
@@ -21,4 +20,3 @@ app = FastAPI(
 
 # Include routers
 app.include_router(api_router)
-app.include_router(pgbench_router, prefix="/pgbench")

@@ -1,10 +1,10 @@
 import pytest
 from fastapi.testclient import TestClient
-from sqlmodel import SQLModel, create_engine, Session
 from sqlalchemy.pool import StaticPool
+from sqlmodel import Session, SQLModel, create_engine
 
-from app.main import app
 from app.database import get_session
+from app.main import app
 from app.models import Server
 
 

@@ -1,5 +1,6 @@
-from sqlmodel import SQLModel, create_engine, Session
 import os
+
+from sqlmodel import Session, SQLModel, create_engine
 
 # Default to SQLite for local development, but support PostgreSQL for production
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./database.db")

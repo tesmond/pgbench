@@ -1,9 +1,10 @@
-from fastapi import Depends, HTTPException
-from sqlmodel import Session, select
 from typing import List
+
+from fastapi import APIRouter, Depends, HTTPException
+from sqlmodel import Session, select
+
 from .database import get_session
 from .models import Server
-from fastapi import APIRouter
 
 router = APIRouter()
 
@@ -15,7 +16,7 @@ def health_check():
 
 
 # Server management endpoints
-@router.post("/servers/", response_model=Server)
+@router.post("/servers", response_model=Server)
 def create_server(server: Server, session: Session = Depends(get_session)):
     """Create a new PostgreSQL server configuration"""
     db_server = Server.model_validate(server)
@@ -25,7 +26,7 @@ def create_server(server: Server, session: Session = Depends(get_session)):
     return db_server
 
 
-@router.get("/servers/", response_model=List[Server])
+@router.get("/servers", response_model=List[Server])
 def read_servers(session: Session = Depends(get_session)):
     """Get all configured PostgreSQL servers"""
     servers = session.exec(select(Server)).all()
